@@ -12,7 +12,7 @@ export default function Home() {
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
-    setButtonValue("...");
+    setButtonValue("Wait a minute, i am processing...");
     event.preventDefault();
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -59,12 +59,13 @@ export default function Home() {
             <option value="text-ada-001">text-ada-001</option>
           </select>
 
-          <small>4000 max for davinci, 2048 max for other</small>
+          <small>4000 max for davinci, 2048 max for other :</small>
           <input
             required
             type="number"
             max="4000"
             min="0"
+            step="1"
             name="token"
             placeholder="Enter max token"
             value={tokenInput}
@@ -72,10 +73,10 @@ export default function Home() {
             className={styles.tokenStyle}
           />
 
-          <small>Between 0.00 and 1</small>
+          <small>Temperature : {temperatureInput}</small>
           <input
             required
-            type="number"
+            type="range"
             step="0.01"
             max="1"
             min="0"
